@@ -11,7 +11,7 @@ def read_solution(file):
                 break
             else:
                 line = line.strip()
-                server_id = line.split(" ")[0]
-                videos_ids = line.split(" ")[1:]
+                server_id = int(line.split(" ")[0])
+                videos_ids = list(int(x) for x in line.split(" ")[1:])
                 solution[server_id] = videos_ids
     return solution
