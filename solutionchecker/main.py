@@ -1,5 +1,10 @@
+from solutionchecker.solution_reader import read_solution
+
+
 def main():
-    pass
+    # todo argparse
+    solution = read_solution("/home/andrzej/Desktop/solution.in")
+    print(solution)
 
 if __name__ == '__main__':
     main()
