@@ -3,19 +3,21 @@ def parse_solution(path_to_file: str):
     Parses solution file.
 
     :param path_to_file: path to file as string
-    :return: dictionary consisting of pairs: server_id (int), list of video ids (as ints)
+    :return: dictionary consisting of pairs:
+             server_id (int), list of video ids (as ints)
     """
     solution = dict()
     if not path_to_file.endswith(".out"):
-        raise TypeError("Invalid solution file extension.")
+        raise Exception("Invalid solution file extension.")
     with open(path_to_file) as file:
-        line_number = -1
+        line_number, amount_of_servers = -1, -1
         for line in file:
             line_number += 1
             if line_number == 0:
                 amount_of_servers = int(line)
             elif line_number > amount_of_servers:
-                print("too many lines")
+                print("Too many lines. Skipping lines from {0} onwards."
+                      .format(line_number))
                 break
             else:
                 line = line.strip().split(" ")
