@@ -11,12 +11,13 @@ def parse_input(path_to_file: str):
              amount of request descriptions (int), amount of cache servers (int),
              cache servers size (int), videos sizes (dictionary consisting of pairs:
                                                     video id (int), video size (int) )
-             endpoints list (list of Endpoint), list of requests (list of RequestInfo)
+             dict of endpoints (consisting of pairs: endpoint_id, endpoint),
+             list of requests (list of RequestInfo)
     """
     amount_of_videos, amount_of_endpoints, amount_of_request_descriptions, \
         amount_of_cache_servers, cache_size = -1, -1, -1, -1, -1
     videos_sizes = dict()
-    endpoints = list()
+    endpoints = dict()
     requests = list()
     if not path_to_file.endswith(".in"):
         raise Exception("Invalid input file extension.")
@@ -38,7 +39,7 @@ def parse_input(path_to_file: str):
                 if line_size == 2:
                     if line_number == next_endpoint_definition_at_line:
                         current_endpoint = __parse_endpoint_definition(endpoint_id, line_content)
-                        endpoints.append(current_endpoint)
+                        endpoints[endpoint_id] = current_endpoint
                         next_endpoint_definition_at_line = __calculate_line_of_next_endpoint(line_number,
                                                                                              current_endpoint)
                         endpoint_id += 1
