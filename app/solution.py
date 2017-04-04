@@ -1,7 +1,7 @@
 import random
 
 
-class Bee:
+class Solution:
 
     def __init__(self, servers, films, solution):
         self.servers = servers

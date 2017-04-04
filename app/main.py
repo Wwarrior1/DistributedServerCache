@@ -1,6 +1,6 @@
-from app.bee import Bee
-from app.server import Server
-from app.film import Film
+from app.solution import Solution
+from datarepresentation.movie import Movie
+from datarepresentation.server import Server
 
 
 def main():
@@ -9,10 +9,10 @@ def main():
     server_capacity = 99
     s0 = Server(0)
     s1 = Server(1)
-    f0 = Film(0, 55)
-    f1 = Film(1, 99)
+    f0 = Movie(0, 55)
+    f1 = Movie(1, 99)
 
-    bee = Bee([s0, s1], [f0, f1], {s0: [f0], s1: [f1]})
+    bee = Solution([s0, s1], [f0, f1], {s0: [f0], s1: [f1]})
     print(bee.random_neighbour(1))
 
 if __name__ == '__main__':
