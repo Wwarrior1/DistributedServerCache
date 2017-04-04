@@ -2,7 +2,7 @@ def parse_solution(path_to_file: str):
     """
     Parses solution file.
 
-    :param path_to_file: path to file as string
+    :param path_to_file: path to solution file as string
     :return: dictionary consisting of pairs:
              server_id (int), list of video ids (as ints)
     """

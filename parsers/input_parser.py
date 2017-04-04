@@ -6,17 +6,20 @@ def parse_input(path_to_file: str):
     """
     Parses input file.
 
-    :param path_to_file: path to file as string
+    :param path_to_file: path to input file as string
     :return: tuple consisting of 8 values: amount of videos (int), amount of endpoints (int),
              amount of request descriptions (int), amount of cache servers (int),
-             cache servers size (int), sizes of videos (),
+             cache servers size (int), videos sizes (dictionary consisting of pairs:
+                                                    video id (int), video size (int) )
              endpoints list (list of Endpoint), list of requests (list of RequestInfo)
     """
     amount_of_videos, amount_of_endpoints, amount_of_request_descriptions, \
         amount_of_cache_servers, cache_size = -1, -1, -1, -1, -1
-    video_sizes = dict()
+    videos_sizes = dict()
     endpoints = list()
     requests = list()
+    if not path_to_file.endswith(".in"):
+        raise Exception("Invalid input file extension.")
     with open(path_to_file) as file:
         line_number = 0
         next_endpoint_definition_at_line = 3
@@ -29,7 +32,7 @@ def parse_input(path_to_file: str):
                 amount_of_videos, amount_of_endpoints, amount_of_request_descriptions,\
                     amount_of_cache_servers, cache_size = __parse_general_data(line_content)
             elif line_number == 2:
-                video_sizes = __parse_video_sizes(line_content)
+                videos_sizes = __parse_video_sizes(line_content)
             else:
                 line_size = len(line_content)
                 if line_size == 2:
@@ -47,7 +50,7 @@ def parse_input(path_to_file: str):
                 else:
                     raise Exception("Incorrect input at line {0}.".format(line_number))
     return (amount_of_videos, amount_of_endpoints, amount_of_request_descriptions,
-            amount_of_cache_servers, cache_size, video_sizes, endpoints, requests)
+            amount_of_cache_servers, cache_size, videos_sizes, endpoints, requests)
 
 
 def __parse_general_data(line_content: list):

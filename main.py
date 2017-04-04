@@ -1,18 +1,11 @@
-from parsers.input_parser import parse_input
-from parsers.solution_parser import parse_solution
+from utils.solution_checker import check_solution
 
 
 def main():
-    solution = parse_solution("/home/andrzej/Documents/solution.out")
-    input_ = parse_input("/home/andrzej/Documents/input.in")
+    input_file = "/home/andrzej/Documents/input.in"
+    solution_file = "/home/andrzej/Documents/solution.out"
+    solution = check_solution(input_file, solution_file)
     print(solution)
-    print(input_[:-2])
-    print("Endpoints:")
-    for e in input_[-2]:
-        print(e)
-    print("Requests:")
-    for r in input_[-1]:
-        print(r)
 
 if __name__ == '__main__':
     main()
