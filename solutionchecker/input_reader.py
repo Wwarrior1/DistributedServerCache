@@ -1,4 +1,5 @@
 from solutionchecker.endpoint import Endpoint
+from solutionchecker.requestinfo import RequestInfo
 
 
 def read_input(file):
@@ -9,6 +10,7 @@ def read_input(file):
     endpoint_id = 0
     next_endpoint_definition_at_line = 3
     current_endpoint = None
+    requests = list()
     with open(file) as f:
         line_number = 0
         for line in f:
@@ -31,12 +33,12 @@ def read_input(file):
                         cache_id, latency = parse_latency_to_cache_server(line)
                         current_endpoint.cache_server_latencies[cache_id] = latency
                 elif line_size == 3:
-                    pass
+                    requests.append(parse_request_info(line))
                 else:
                     print("incorrect input at line {0}".format(line_number))
                     break
     return [amount_of_videos, amount_of_endpoints, amount_of_request_descriptions,
-            amount_of_cache_servers, cache_size, video_sizes, endpoints]
+            amount_of_cache_servers, cache_size, video_sizes, endpoints, requests]
 
 
 def parse_general_data(line):
@@ -58,3 +60,9 @@ def parse_endpoint_definition(id_, line):
 
 def parse_latency_to_cache_server(line):
     return list(int(x) for x in line.strip().split(" "))
+
+
+def parse_request_info(line):
+    line = line.strip().split(" ")
+    line = list(int(x) for x in line)
+    return RequestInfo(line[0], line[1], line[2])

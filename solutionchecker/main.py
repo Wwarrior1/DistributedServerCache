@@ -9,8 +9,11 @@ def main():
     print(solution)
     print(input_[:-1])
     print("Endpoints:")
-    for e in input_[-1]:
+    for e in input_[-2]:
         print(e)
+    print("Requests:")
+    for r in input_[-1]:
+        print(r)
 
 if __name__ == '__main__':
     main()
