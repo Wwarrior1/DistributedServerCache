@@ -6,5 +6,8 @@ class Endpoint:
         self.cache_server_latencies = dict()
 
     def __repr__(self):
-        return "Endpoint#{0}: latency to datacenter: {1}, amount of cache servers: {2}"\
-            .format(self.id_, self.datacenter_latency, self.amount_of_caches)
+        return "Endpoint#{0}:\n" \
+               "latency to datacenter: {1}, amount of cache servers: {2}\n" \
+               "cache server latencies: {3}"\
+            .format(self.id_, self.datacenter_latency,
+                    self.amount_of_caches, self.cache_server_latencies)

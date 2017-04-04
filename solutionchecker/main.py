@@ -7,7 +7,10 @@ def main():
     solution = read_solution("/home/andrzej/Documents/solution.sol")
     input_ = read_input("/home/andrzej/Documents/input.in")
     print(solution)
-    print(input_)
+    print(input_[:-1])
+    print("Endpoints:")
+    for e in input_[-1]:
+        print(e)
 
 if __name__ == '__main__':
     main()
