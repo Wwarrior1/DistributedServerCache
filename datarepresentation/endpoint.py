@@ -4,6 +4,7 @@ class Endpoint:
         self.datacenter_latency = datacenter_latency
         self.amount_of_caches = amount_of_caches
         self.cache_server_latencies = dict()
+        self.connections = []
 
     def __str__(self):
         return self.__pretty_string_representation()

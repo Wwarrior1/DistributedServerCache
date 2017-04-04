@@ -1,5 +1,4 @@
 import random
-from datarepresentation.movie import Movie
 
 
 class Solution:
@@ -47,7 +46,14 @@ class Solution:
         res = 0
 
         for request in self.data.requests:
-            res += 1
-            # print(request)
+            m = self.data.movies[request.video_id]
+            e = self.data.endpoints[request.endpoint_id]
+            best_conn = e.datacenter_latency
+
+            for c in e.connections:
+                if c.latency < best_conn and m in self.solution[c.server]:
+                    best_conn = c.latency
+
+            res += best_conn * request.amount_of_requests
 
         return res

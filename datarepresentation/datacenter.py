@@ -6,3 +6,7 @@ class DataCenter:
         self.servers = servers
         self.connections = connections
         self.requests = requests
+
+        for connection in connections:
+            connection.server.connections.append(connection)
+            connection.endpoint.connections.append(connection)

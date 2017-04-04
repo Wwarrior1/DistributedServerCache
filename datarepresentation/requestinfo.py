@@ -1,4 +1,5 @@
 class RequestInfo:
+
     def __init__(self, video_id, endpoint_id, amount_of_requests):
         self.video_id = video_id
         self.endpoint_id = endpoint_id
