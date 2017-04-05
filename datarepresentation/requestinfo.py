@@ -1,5 +1,4 @@
 class RequestInfo:
-
     def __init__(self, video_id, endpoint_id, amount_of_requests):
         self.video_id = video_id
         self.endpoint_id = endpoint_id
@@ -10,4 +9,4 @@ class RequestInfo:
 
     def __pretty_string_representation(self):
         return "{0} requests for video {1} coming from endpoint {2}"\
-.format(self.amount_of_requests, self.video_id, self.endpoint_id)
+            .format(self.amount_of_requests, self.video_id, self.endpoint_id)
