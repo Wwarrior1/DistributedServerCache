@@ -26,14 +26,16 @@ def print_solution_pool(pool):
 
 
 def best_in_neighbourhood(solution, radius, number_of_bees):
-    neighbours = [solution.random_neighbour(radius) for _ in range(number_of_bees)]
+    neighbours = []
+    for _ in range(number_of_bees):
+        neighbours.append(solution.random_neighbour(radius))
     best_neighbour = min(neighbours, key=lambda s: s.evaluate())
     return best_neighbour if best_neighbour.evaluate() < solution.evaluate() else solution
 
 
 def main():
 
-    n = 10
+    n = 5
     m = 3
     e = 1
     nep = 4
@@ -46,9 +48,7 @@ def main():
 
     # bee = Solution(data, {data.servers[0]: [data.movies[0]], data.servers[1]: [data.movies[1]]})
     # print(bee)
-    # print(bee.evaluate())
     # print(bee.random_neighbour(1))
-    # print(bee.random_neighbour(1).evaluate())
 
     pool = [random_solution(data) for _ in range(n)]
 
@@ -70,8 +70,6 @@ def main():
             pool.append(best_in_neighbourhood(gs, ngh, nsp))
         for _ in range(n-m):
             pool.append(random_solution(data))
-
-        # print_solution_pool(pool)
 
 
 if __name__ == '__main__':

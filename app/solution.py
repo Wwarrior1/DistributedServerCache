@@ -17,22 +17,28 @@ class Solution:
         res += str(self.evaluate())
         return res
 
+    def __copy__(self):
+        res = Solution(self.data, dict(self.solution))
+        for l in res.solution:
+            res.solution[l] = list(res.solution[l])
+        return res
+
     def random_neighbour(self, radius):
 
+        res = self.__copy__()
         if radius == 0:
-            return self
+            return res
 
         acceptable_ops = [(s, f)
-                          for s in self.data.servers
-                          for f in self.data.movies
-                          if f in self.solution[s] or f.size <= self.free_space(s)]
+                          for s in res.data.servers
+                          for f in res.data.movies
+                          if f in res.solution[s] or f.size <= res.free_space(s)]
 
         op = random.choice(acceptable_ops)
         s = op[0]
         f = op[1]
 
-        res = Solution(self.data, self.solution)
-        if f in self.solution[s]:
+        if f in res.solution[s]:
             res.solution[s].remove(f)
         else:
             res.solution[s].append(f)
