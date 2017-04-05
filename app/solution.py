@@ -14,11 +14,12 @@ class Solution:
             for m in self.solution[s]:
                 res += str(m) + " "
             res += "], "
+        res += str(self.evaluate())
         return res
 
     def random_neighbour(self, radius):
 
-        if radius==0:
+        if radius == 0:
             return self
 
         acceptable_ops = [(s, f)
