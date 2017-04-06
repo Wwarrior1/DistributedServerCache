@@ -8,7 +8,8 @@ class AlgorithmUtils:
     def random_solution(data):
         res = dict()
         for ids in range(data.amount_of_cache_servers):
-            res[ids] = [0]
+            random_video = random.randint(0, len(data.videos_sizes)-1)
+            res[ids] = [random_video] if data.videos_sizes[random_video] <= data.cache_size else []
         return res
 
     @staticmethod
@@ -18,7 +19,7 @@ class AlgorithmUtils:
     @staticmethod
     def random_neighbour(data, solution, radius):
 
-        res = solution.copy()
+        res = AlgorithmUtils.solution_copy(solution)
         if radius == 0:
             return res
 
@@ -43,9 +44,19 @@ class AlgorithmUtils:
         neighbours = []
         for _ in range(number_of_bees):
             neighbours.append(AlgorithmUtils.random_neighbour(data, solution, radius))
-        best_neighbour = min(neighbours, key=lambda s: calculate_score(data, s))
-        return best_neighbour if calculate_score(data, best_neighbour) < calculate_score(data, solution) else solution
+        best_neighbour = max(neighbours, key=lambda s: calculate_score(data, s))
+        return best_neighbour if calculate_score(data, best_neighbour) > calculate_score(data, solution) else solution
 
     @staticmethod
     def free_space(data, server, solution):
-        return 999
+        res = data.cache_size
+        for v in solution[server]:
+            res -= data.videos_sizes[v]
+        return res
+
+    @staticmethod
+    def solution_copy(solution):
+        res = dict()
+        for s in solution:
+            res[s] = solution[s][:]
+        return res

@@ -27,13 +27,13 @@ class Algorithm:
         pool = [AlgorithmUtils.random_solution(data) for _ in range(n)]
 
         for i in range(max_iter):
-            print("Iter ", i)
+            # print("Iter ", i)
 
-            solutions_ranking = sorted(pool, key=lambda s: calculate_score(data, s))
+            solutions_ranking = sorted(pool, key=lambda s: calculate_score(data, s), reverse=True)
             elite_solutions = solutions_ranking[0:e]
             good_solutions = solutions_ranking[e:m]
 
-            AlgorithmUtils.print_solution_pool(solutions_ranking)
+            # AlgorithmUtils.print_solution_pool(solutions_ranking)
 
             pool = []
             for es in elite_solutions:
@@ -42,3 +42,6 @@ class Algorithm:
                 pool.append(AlgorithmUtils.best_in_neighbourhood(data, gs, ngh, nsp))
             for _ in range(n-m):
                 pool.append(AlgorithmUtils.random_solution(data))
+
+        print(pool[0])
+        return calculate_score(data, pool[0])
