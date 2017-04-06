@@ -1,20 +1,20 @@
 from app.solution import Solution
-from datarepresentation.movie import Movie
+from datarepresentation.video import Video
 from datarepresentation.server import Server
 from datarepresentation.endpoint import Endpoint
-from datarepresentation.datacenter import DataCenter
+from datarepresentation.data import Data
 from datarepresentation.connection import Connection
 from datarepresentation.requestinfo import RequestInfo
 
 
 def data_init():
     endpoints = [Endpoint(0, 100, 1), Endpoint(1, 100, 1)]
-    movies = [Movie(0, 55), Movie(1, 99)]
+    movies = [Video(0, 55), Video(1, 99)]
     servers = [Server(0), Server(1)]
     connections = [Connection(endpoints[0], servers[0], 11), Connection(endpoints[1], servers[1], 66)]
     requests = [RequestInfo(1, 0, 3), RequestInfo(0, 1, 1)]
 
-    return DataCenter(endpoints, movies, servers, connections, requests)
+    return Data(endpoints, movies, servers, connections, requests)
 
 
 def random_solution(data):
