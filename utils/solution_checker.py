@@ -16,7 +16,7 @@ def check_solution(path_to_input_file: str, path_to_solution_file: str):
     solution = parse_solution(path_to_solution_file)
     validation_result = __validate_solution(input_data, solution)
     if validation_result is True:
-        return __calculate_score(input_data, solution)
+        return calculate_score(input_data, solution)
     raise Exception("Solution is not valid! (total size of "
                     "videos stored at server #{0} exceeds "
                     "server capacity)".format(validation_result))
@@ -42,7 +42,7 @@ def __validate_solution(input_data: Data, solution: dict):
     return True
 
 
-def __calculate_score(input_data: Data, solution: dict):
+def calculate_score(input_data: Data, solution: dict):
     """
     Calculates solution score - average time saved in microseconds.
 
