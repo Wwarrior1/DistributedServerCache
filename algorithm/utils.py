@@ -43,9 +43,10 @@ class AlgorithmUtils:
     def best_in_neighbourhood(data, solution, radius, number_of_bees):
         neighbours = []
         for _ in range(number_of_bees):
-            neighbours.append(AlgorithmUtils.random_neighbour(data, solution, radius))
-        best_neighbour = max(neighbours, key=lambda s: calculate_score(data, s))
-        return best_neighbour if calculate_score(data, best_neighbour) > calculate_score(data, solution) else solution
+            neighbour = AlgorithmUtils.random_neighbour(data, solution, radius)
+            neighbours.append((neighbour, calculate_score(data, neighbour)))
+        best_neighbour = max(neighbours, key=lambda s: calculate_score(data, s[0]))
+        return best_neighbour[0] if best_neighbour[1] > calculate_score(data, solution) else solution
 
     @staticmethod
     def free_space(data, server, solution):

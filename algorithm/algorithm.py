@@ -22,12 +22,12 @@ class Algorithm:
         nep = 4
         nsp = 2
         ngh = 1
-        max_iter = 11
+        max_iter = 9
 
         pool = [AlgorithmUtils.random_solution(data) for _ in range(n)]
 
         for i in range(max_iter):
-            # print("Iter ", i)
+            print("Iter ", i)
 
             solutions_ranking = sorted(pool, key=lambda s: calculate_score(data, s), reverse=True)
             elite_solutions = solutions_ranking[0:e]
