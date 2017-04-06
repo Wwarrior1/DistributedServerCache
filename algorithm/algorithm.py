@@ -16,13 +16,18 @@ class Algorithm:
     @staticmethod
     def execute(data):
 
-        n = 5
-        m = 3
-        e = 1
-        nep = 4
-        nsp = 2
-        ngh = 1
-        max_iter = 9
+        """
+        :param data:
+        :return: score of the best solution found
+        """
+
+        n = 55
+        m = 7
+        e = 2
+        nep = 44
+        nsp = 27
+        ngh = 5
+        max_iter = 122
 
         pool = [AlgorithmUtils.random_solution(data) for _ in range(n)]
 

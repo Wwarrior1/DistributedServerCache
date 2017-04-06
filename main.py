@@ -6,7 +6,8 @@ def main():
     # input_file = "files/videos_worth_spreading.in"
     # input_file = "files/kittens.in"
     # input_file = "files/example1.in"
-    input_file = "files/trending_today.in"
+    input_file = "files/me_at_the_zoo.in"
+    # input_file = "files/trending_today.in"
 
     # solution_file = "files/example1.out"
     # solution = check_solution(input_file, solution_file)

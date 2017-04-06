@@ -6,6 +6,19 @@ class AlgorithmUtils:
 
     @staticmethod
     def random_solution(data):
+        """
+        TODO to jest oczywiscie bez sensu i do zmiany
+        Wbrew pozorom problem generowania losowego rozwiazania nie jest trywialny - pamietajmy, ze bierzemy pod uwage
+        tylko poprawne rozwiazania i najlepiej by bylo losowac je z rownym prawdopodobienstwem
+
+        Sprowadza sie to do wylosowania takiego zbioru
+
+        Oczywiscie mozna generowac wszystkie mozliwe zbiory... ale przy duzych danych lepiej tego uniknac
+
+        :param data:
+        :return:
+        """
+
         res = dict()
         for ids in range(data.amount_of_cache_servers):
             random_video = random.randint(0, len(data.videos_sizes)-1)
