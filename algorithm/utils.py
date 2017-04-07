@@ -11,12 +11,10 @@ class AlgorithmUtils:
         Wbrew pozorom problem generowania losowego rozwiazania nie jest trywialny - pamietajmy, ze bierzemy pod uwage
         tylko poprawne rozwiazania i najlepiej by bylo losowac je z rownym prawdopodobienstwem
 
-        Sprowadza sie to do wylosowania takiego zbioru
+        Sprowadza sie to do takiego problemu:
+        Z pewnego zbioru [a1, a2, ... ak] wylosować podzbior tak, zeby suma nie przekroczyla danej liczby N
 
-        Oczywiscie mozna generowac wszystkie mozliwe zbiory... ale przy duzych danych lepiej tego uniknac
-
-        :param data:
-        :return:
+        Oczywiscie mozna generowac wszystkie mozliwe zbiory... ale to ma paskudna zlozonosc
         """
 
         res = dict()

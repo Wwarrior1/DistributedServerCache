@@ -52,7 +52,7 @@ def parse_input(path_to_file: str):
                 else:
                     raise Exception("Incorrect input at line {0}.".format(line_number))
 
-    return Data(endpoints, videos_sizes, amount_of_cache_servers, None, requests, cache_size)
+    return Data(endpoints, videos_sizes, amount_of_cache_servers, requests, cache_size)
 
     # return (amount_of_videos, amount_of_endpoints, amount_of_request_descriptions,
     #         amount_of_cache_servers, cache_size, videos_sizes, endpoints, requests)

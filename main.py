@@ -1,5 +1,6 @@
 from algorithm.algorithm import Algorithm
 from parsers.input_parser import parse_input
+from utils.solution_checker import check_solution
 
 
 def main():
