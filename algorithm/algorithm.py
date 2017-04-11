@@ -21,13 +21,13 @@ class Algorithm:
         max_iter - liczba iteracji
         """
 
-        n = 4
-        m = 3
-        e = 1
-        nep = 4
-        nsp = 2
-        ngh = 4
-        max_iter = 8
+        n = 25
+        m = 9
+        e = 3
+        nep = 9
+        nsp = 3
+        ngh = 1
+        max_iter = 1000
 
         # inicjalizujemy pule losowymi rozwiazaniami
         pool = [AlgorithmUtils.random_solution(data) for _ in range(n)]

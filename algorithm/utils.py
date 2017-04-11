@@ -22,7 +22,7 @@ class AlgorithmUtils:
                 res[s] = random.sample(range(len(data.videos_sizes)), n_videos)
                 while sum([data.videos_sizes[v] for v in res[s]]) > AlgorithmUtils.free_space(data, res, s):
                     res[s].pop(random.randint(0, len(res[s])-1))
-        print(res[5])
+
         return res
 
     @staticmethod
