@@ -60,5 +60,5 @@ class Algorithm:
             # podsumowujac - jesli np. n=5, m=3, e=1, to zawsze na koniec iteracji 1 pszczola pochodzi z obszaru
             # elitarnego, 2 z dobrych, a 2 sa losowane od nowa.
 
-        print(max(pool, key=lambda s: calculate_score(data, s)))
-        return calculate_score(data, pool[0])
+        pool = sorted(pool, key=lambda s: calculate_score(data, s), reverse=True)
+        return pool[0]
