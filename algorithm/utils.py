@@ -7,20 +7,22 @@ class AlgorithmUtils:
     @staticmethod
     def random_solution(data):
         """
-        TODO to jest oczywiscie bez sensu i do zmiany
-        Wbrew pozorom problem generowania losowego rozwiazania nie jest trywialny - pamietajmy, ze bierzemy pod uwage
-        tylko poprawne rozwiazania i najlepiej by bylo losowac je z rownym prawdopodobienstwem
-
-        Sprowadza sie to do takiego problemu:
-        Z pewnego zbioru [a1, a2, ... ak] wylosować podzbior tak, zeby suma nie przekroczyla danej liczby N
-
-        Oczywiscie mozna generowac wszystkie mozliwe zbiory... ale to ma paskudna zlozonosc
+        Nie jest do doskonaly sposob, ale na nic lepszego nie wpadlismy
         """
 
         res = dict()
-        for ids in range(data.amount_of_cache_servers):
-            random_video = random.randint(0, len(data.videos_sizes)-1)      # film to jest indeks na liscie video_sizes
-            res[ids] = [random_video] if data.videos_sizes[random_video] <= data.cache_size else []
+        avg_video_size = sum(data.videos_sizes)/len(data.videos_sizes)
+        total_n_videos = round(data.cache_size/avg_video_size)
+
+        for s in range(data.amount_of_cache_servers):
+            if total_n_videos == 0:
+                res[s] = []
+            else:
+                n_videos = random.randint(0, total_n_videos-1)      # ile filmow losujemy
+                res[s] = random.sample(range(len(data.videos_sizes)), n_videos)
+                while sum([data.videos_sizes[v] for v in res[s]]) > AlgorithmUtils.free_space(data, res, s):
+                    res[s].pop(random.randint(0, len(res[s])-1))
+        print(res[5])
         return res
 
     @staticmethod
