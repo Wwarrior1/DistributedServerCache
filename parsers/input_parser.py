@@ -8,12 +8,7 @@ def parse_input(path_to_file: str):
     Parses input file.
 
     :param path_to_file: path to input file as string
-    :return: tuple consisting of 8 values: amount of videos (int), amount of endpoints (int),
-             amount of request descriptions (int), amount of cache servers (int),
-             cache servers size (int), videos sizes (dictionary consisting of pairs:
-                                                    video id (int), video size (int) )
-             dict of endpoints (consisting of pairs: endpoint_id, endpoint),
-             list of requests (list of RequestInfo)
+    :return: Data objet containing a complete description of input (see datarepresentation/data.py)
     """
     amount_of_videos, amount_of_endpoints, amount_of_request_descriptions, \
         amount_of_cache_servers, cache_size = -1, -1, -1, -1, -1
@@ -53,9 +48,6 @@ def parse_input(path_to_file: str):
                     raise Exception("Incorrect input at line {0}.".format(line_number))
 
     return Data(endpoints, videos_sizes, amount_of_cache_servers, requests, cache_size)
-
-    # return (amount_of_videos, amount_of_endpoints, amount_of_request_descriptions,
-    #         amount_of_cache_servers, cache_size, videos_sizes, endpoints, requests)
 
 
 def __parse_general_data(line_content: list):

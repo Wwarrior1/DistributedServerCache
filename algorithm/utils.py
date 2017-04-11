@@ -31,7 +31,7 @@ class AlgorithmUtils:
         Potencjalnie mozemy wyladowac w odleglosci radius lub mniejszej (w szczegolnosci wrocic do solution) - to chyba
             nie szkodzi?
         Nie ma tez gwarancji, ze sie nie powtorza - to chyba nie szkodzi?
-        Prawdopodobienstwo wylosowania kazdego rozwiazania niekoniecznie jest rowne. Ale nie wiem jak inaczej to zrobic.
+        Prawdopodobienstwo wylosowania kazdego rozwiazania niekoniecznie jest rowne. Ale watpie czy da sie lepiej.
 
         TODO or not TODO? Zostawiamy to, czy ktos ma lepszy pomysl? Ja nie. :)
         """
@@ -40,15 +40,18 @@ class AlgorithmUtils:
         if radius == 0:
             return res
 
-        # TODO - optimize free_space here
-        # I guess free_space is invoked many times in list comprehension
-        # we could previously preapre a list of free_spaces for each server
+        # licze to wczesniej, zeby nie robic tego wielokrotnie w list comprehension
+        free_space_on_server = \
+            [AlgorithmUtils.free_space(data, solution, s) for s in range(data.amount_of_cache_servers)]
 
-        # lista wszystkich operacji
+        # generujemy liste moliwych do wykonania elementarnych modyfikacji rozwiazania
+        # sa to operacje dwoch typow: dodaj albo usun
+        # dodac mozemy te filmy, ktore sie smieszcza
+        # usunac mozemy te, ktore sa aktualnie w rozwiazaniu
         acceptable_ops = [(s, v)
                           for s in range(data.amount_of_cache_servers)
                           for v in range(len(data.videos_sizes))
-                          if v in res[s] or data.videos_sizes[v] <= AlgorithmUtils.free_space(data, solution, s)]
+                          if v in res[s] or data.videos_sizes[v] <= free_space_on_server[s]]
 
         op = random.choice(acceptable_ops)
         s = op[0]
