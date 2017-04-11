@@ -19,7 +19,7 @@ class AlgorithmUtils:
 
         res = dict()
         for ids in range(data.amount_of_cache_servers):
-            random_video = random.randint(0, len(data.videos_sizes)-1)
+            random_video = random.randint(0, len(data.videos_sizes)-1)      # film to jest indeks na liscie video_sizes
             res[ids] = [random_video] if data.videos_sizes[random_video] <= data.cache_size else []
         return res
 
@@ -40,6 +40,11 @@ class AlgorithmUtils:
         if radius == 0:
             return res
 
+        # TODO - optimize free_space here
+        # I guess free_space is invoked many times in list comprehension
+        # we could previously preapre a list of free_spaces for each server
+
+        # lista wszystkich operacji
         acceptable_ops = [(s, v)
                           for s in range(data.amount_of_cache_servers)
                           for v in range(len(data.videos_sizes))
