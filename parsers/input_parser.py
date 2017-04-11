@@ -1,5 +1,6 @@
 from datarepresentation.endpoint import Endpoint
 from datarepresentation.requestinfo import RequestInfo
+from datarepresentation.data import Data
 
 
 def parse_input(path_to_file: str):
@@ -50,8 +51,11 @@ def parse_input(path_to_file: str):
                     requests.append(__parse_request_info(line_content))
                 else:
                     raise Exception("Incorrect input at line {0}.".format(line_number))
-    return (amount_of_videos, amount_of_endpoints, amount_of_request_descriptions,
-            amount_of_cache_servers, cache_size, videos_sizes, endpoints, requests)
+
+    return Data(endpoints, videos_sizes, amount_of_cache_servers, requests, cache_size)
+
+    # return (amount_of_videos, amount_of_endpoints, amount_of_request_descriptions,
+    #         amount_of_cache_servers, cache_size, videos_sizes, endpoints, requests)
 
 
 def __parse_general_data(line_content: list):
