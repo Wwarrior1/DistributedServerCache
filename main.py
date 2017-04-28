@@ -1,21 +1,21 @@
 import time
 from argparse import ArgumentParser
-from os.path import join
-
-from os import getcwd
 
 from algorithm.algorithm import Algorithm
 from parsers.input_parser import parse_input
 from parsers.output_builder import save_solution
+from utils.argument_parser_util import add_parser_arguments
 from utils.solution_checker import check_solution
 
 
 def main():
-    input_file = args.i
-    output_file = args.o
+    input_file, output_file = args.i, args.o
+    n, m, e = args.n, args.m, args.e
+    nep, nsp, ngh = args.nep, args.nsp, args.ngh
+    iterations = args.max
 
     before = time.time()
-    best_solution = Algorithm.execute(parse_input(input_file))
+    best_solution = Algorithm.execute(parse_input(input_file), n, m, e, nep, nsp, ngh, iterations)
     save_solution(best_solution, output_file)
     score = check_solution(input_file, output_file)
     after = time.time()
@@ -29,14 +29,6 @@ def main():
 
 if __name__ == "__main__":
     parser = ArgumentParser(description="Distributed cache problem solver.")
-
-    default_input_filename = "me_at_the_zoo.in"
-    parser.add_argument("-i", "-input_file", help="Path to input file.", type=str,
-                        default=join(getcwd(), "files", default_input_filename))
-
-    default_output_filename = "solution.out"
-    parser.add_argument("-o", "-output_file", help="Path to output file.", type=str,
-                        default=join(getcwd(), "files", default_output_filename))
-
+    add_parser_arguments(parser)
     args = parser.parse_args()
     main()
