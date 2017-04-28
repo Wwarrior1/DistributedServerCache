@@ -5,31 +5,26 @@ from time import time
 from concurrent.futures import ProcessPoolExecutor
 from os import getcwd
 
-from parsers.output_builder import concatenate_executions_results
+from parsers.output_builder import clear_results_file
 
 
 def main():
     main_path = __get_path()
     input_dir = join(split(getcwd())[0], "files")
     input_file = join(input_dir, "me_at_the_zoo.in")
-    output_dir = join(split(getcwd())[0], "files", "executions")
-    extension = ".out"
+    output_dir = join(split(getcwd())[0], "files")
+    output_file = join(output_dir, "results.csv")
+    clear_results_file(',', output_file)
     before = time()
     with ProcessPoolExecutor(None) as executor:
         # todo make ranges and steps as parameters? maybe add more parameters to manipulate
-        for bees in range(10, 51, 10):
-            for iterations in range(100, 251, 50):
+        for bees in range(10, 11, 10):
+            for iterations in range(100, 150, 50):
                 for tries_with_same_parameters in range(0, 10):
-                    output_file = join(output_dir,
-                                       "solution-n{0}-max{1}{2}#{3}".format(bees, iterations,
-                                                                            tries_with_same_parameters,
-                                                                            extension))
                     command = "python {0} -i {1} -o {2} -n {3} -max {4} -s False" \
                         .format(main_path, input_file, output_file, bees, iterations)
                     executor.submit(call, command)
     after = time()
-    output_file = join(output_dir, "results.csv")
-    concatenate_executions_results(",", output_dir, extension, output_file)
     print("Execution took: " + str(round(after - before, 2)) + " s")
 
 
