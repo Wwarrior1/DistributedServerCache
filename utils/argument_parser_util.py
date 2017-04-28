@@ -1,3 +1,4 @@
+from argparse import ArgumentTypeError
 from os.path import join
 
 from os import getcwd
@@ -36,6 +37,19 @@ def add_parser_arguments(parser):
     parser.add_argument("-ngh", help="Neighborhood radius.", type=int,
                         default=default_ngh)
 
-    default_max_iter = 1000
+    default_max_iter = 100
     parser.add_argument("-max", "-iterations", help="Amount of iterations.", type=int,
                         default=default_max_iter)
+
+    default_s = "True"
+    parser.add_argument("-s", "-save_solution", help="Should solution be saved?", type=str,
+                        default=default_s)
+
+
+def str2bool(v):
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    if v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise ArgumentTypeError('Boolean value expected.')
