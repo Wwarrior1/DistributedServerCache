@@ -15,15 +15,24 @@ def main():
     output_dir = join(split(getcwd())[0], "files")
     output_file = join(output_dir, "results.csv")
     clear_results_file(';', output_file)
+
+    bees = 50
+    good_solutions = 9
+    elite_solutions = 3  # must be lower than good_solutions
+    nep = 9
+    nsp = 3  # nsp + nep = bees
+    ngh = 1
+    iterations = 250
+
     before = time()
     with ProcessPoolExecutor(None) as executor:
-        # todo make ranges and steps as parameters? maybe add more parameters to manipulate
-        for bees in range(10, 11, 10):
-            for iterations in range(100, 150, 50):
-                for tries_with_same_parameters in range(0, 10):
-                    command = "python {0} -i {1} -o {2} -n {3} -max {4} -s False" \
-                        .format(main_path, input_file, output_file, bees, iterations)
-                    executor.submit(call, command)
+        # to run with different parameters add a for loop within "with" block
+        # example: "for parameter in range(start, stop, step):"
+        nsp = bees - nep
+        command = "python {0} -i {1} -o {2} -n {3} -m {4} -e {5} -nep {6} -nsp {7} -ngh {8} -max {9} -s False"\
+            .format(main_path, input_file, output_file, bees, good_solutions,
+                    elite_solutions, nep, nsp, ngh, iterations)
+        executor.submit(call, command)
     after = time()
     print("Execution took: " + str(round(after - before, 2)) + " s")
 
