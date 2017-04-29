@@ -3,9 +3,8 @@ from utils.solution_checker import calculate_score
 
 
 class Algorithm:
-
     @staticmethod
-    def execute(data):
+    def execute(data, n, m, e, nep, nsp, ngh, iterations):
 
         """
         Pomaga myslenie o rozwiazaniach jako o kwiatkach. Kazda pszczola siedzi w danym momencie na jednym konkretnym
@@ -21,20 +20,10 @@ class Algorithm:
         max_iter - liczba iteracji
         """
 
-        n = 25
-        m = 9
-        e = 3
-        nep = 9
-        nsp = 3
-        ngh = 1
-        max_iter = 1000
-
         # inicjalizujemy pule losowymi rozwiazaniami
         pool = [AlgorithmUtils.random_solution(data) for _ in range(n)]
 
-        for i in range(max_iter):
-            print("Iter ", i)
-
+        for i in range(iterations):
             # dla kazdego rozwiazania obliczamy wynik - ukladamy je od najlepszych do najgorszych
             solutions_ranking = sorted(pool, key=lambda s: calculate_score(data, s), reverse=True)
             # najlepsze e rozwiazan to elitarne...
@@ -54,11 +43,11 @@ class Algorithm:
             for gs in good_solutions:
                 pool.append(AlgorithmUtils.best_in_neighbourhood(data, gs, ngh, nsp))
             # dla pszczol ktore byly slabe wybieramy dla nich nowe, calkowicie losowe rozwiazania (leca gdzie indziej)
-            for _ in range(n-m):
+            for _ in range(n - m):
                 pool.append(AlgorithmUtils.random_solution(data))
 
-            # podsumowujac - jesli np. n=5, m=3, e=1, to zawsze na koniec iteracji 1 pszczola pochodzi z obszaru
-            # elitarnego, 2 z dobrych, a 2 sa losowane od nowa.
+                # podsumowujac - jesli np. n=5, m=3, e=1, to zawsze na koniec iteracji 1 pszczola pochodzi z obszaru
+                # elitarnego, 2 z dobrych, a 2 sa losowane od nowa.
 
         pool = sorted(pool, key=lambda s: calculate_score(data, s), reverse=True)
         return pool[0]
