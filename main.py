@@ -25,7 +25,7 @@ def main():
     else:
         score = calculate_score(data, best_solution)
         filename = split(input_file)[1]
-        save_execution_parameters(",", filename, n, m, e, nep, nsp, ngh, iterations, score, output_file)
+        save_execution_parameters(";", filename, n, m, e, nep, nsp, ngh, iterations, score, output_file)
     after = time()
 
     print(best_solution)

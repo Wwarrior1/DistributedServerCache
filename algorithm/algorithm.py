@@ -24,8 +24,6 @@ class Algorithm:
         pool = [AlgorithmUtils.random_solution(data) for _ in range(n)]
 
         for i in range(iterations):
-            print("Iter ", i)
-
             # dla kazdego rozwiazania obliczamy wynik - ukladamy je od najlepszych do najgorszych
             solutions_ranking = sorted(pool, key=lambda s: calculate_score(data, s), reverse=True)
             # najlepsze e rozwiazan to elitarne...

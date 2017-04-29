@@ -14,7 +14,7 @@ def main():
     input_file = join(input_dir, "me_at_the_zoo.in")
     output_dir = join(split(getcwd())[0], "files")
     output_file = join(output_dir, "results.csv")
-    clear_results_file(',', output_file)
+    clear_results_file(';', output_file)
     before = time()
     with ProcessPoolExecutor(None) as executor:
         # todo make ranges and steps as parameters? maybe add more parameters to manipulate
