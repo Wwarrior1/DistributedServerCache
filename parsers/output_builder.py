@@ -12,4 +12,4 @@ def save_execution_parameters(separator, file, n, m, e, nep, nsp, ngh, iteration
 
 def clear_results_file(separator, output_file):
     with open(output_file, 'w') as out:
-        out.write(separator.join(("file", "n", "m", "e", "nep", "nsp", "ngp", "iterations", "score")) + "\n")
+        out.write(separator.join(("file", "n", "m", "e", "nep", "nsp", "ngh", "iterations", "score")) + "\n")
