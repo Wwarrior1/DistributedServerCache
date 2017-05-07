@@ -38,7 +38,7 @@ def add_parser_arguments(parser):
                         default=default_ngh)
 
     default_max_iter = 100
-    parser.add_argument("-max", "-iterations", help="Amount of iterations.", type=int,
+    parser.add_argument("-max", "-iterations", help="Number of iterations.", type=int,
                         default=default_max_iter)
 
     default_s = "True"
