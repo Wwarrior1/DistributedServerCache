@@ -14,23 +14,23 @@ def add_parser_arguments(parser):
                         default=join(getcwd(), "files", default_output_filename))
 
     default_n = 25
-    parser.add_argument("-n", "-bees", help="Amount of bees.", type=int,
+    parser.add_argument("-n", "-bees", help="Number of bees.", type=int,
                         default=default_n)
 
     default_m = 9
-    parser.add_argument("-m", "-good_solutions", help="Amount of good solutions.", type=int,
+    parser.add_argument("-m", "-good_solutions", help="Number of good solutions.", type=int,
                         default=default_m)
 
     default_e = 3
-    parser.add_argument("-e", "-elite_solutions", help="Amount of elite solutions.", type=int,
+    parser.add_argument("-e", "-elite_solutions", help="Number of elite solutions.", type=int,
                         default=default_e)
 
     default_nep = 9
-    parser.add_argument("-nep", help="???", type=int,
+    parser.add_argument("-nep", help="Number of solutions searched in elite solutions' neighbourhood", type=int,
                         default=default_nep)
 
     default_nsp = 3
-    parser.add_argument("-nsp", help="???", type=int,
+    parser.add_argument("-nsp", help="Number of solutions searched in good solutions' neighbourhood", type=int,
                         default=default_nsp)
 
     default_ngh = 1
