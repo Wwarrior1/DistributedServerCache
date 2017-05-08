@@ -6,9 +6,6 @@ class AlgorithmUtils:
 
     @staticmethod
     def random_solution(data):
-        """
-        Nie jest do doskonaly sposob, ale na nic lepszego nie wpadlismy
-        """
 
         res = dict()
         avg_video_size = sum(data.videos_sizes)/len(data.videos_sizes)
@@ -28,28 +25,13 @@ class AlgorithmUtils:
     @staticmethod
     def random_neighbour(data, solution, radius):
 
-        """
-        Na razie to dziala tak, ze 'radius' razy losujemy sasiada w odleglosci 1
-        Potencjalnie mozemy wyladowac w odleglosci radius lub mniejszej (w szczegolnosci wrocic do solution) - to chyba
-            nie szkodzi?
-        Nie ma tez gwarancji, ze sie nie powtorza - to chyba nie szkodzi?
-        Prawdopodobienstwo wylosowania kazdego rozwiazania niekoniecznie jest rowne. Ale watpie czy da sie lepiej.
-
-        TODO or not TODO? Zostawiamy to, czy ktos ma lepszy pomysl? Ja nie. :)
-        """
-
         res = AlgorithmUtils.solution_copy(solution)
         if radius == 0:
             return res
 
-        # licze to wczesniej, zeby nie robic tego wielokrotnie w list comprehension
         free_space_on_server = \
             [AlgorithmUtils.free_space(data, solution, s) for s in range(data.amount_of_cache_servers)]
 
-        # generujemy liste moliwych do wykonania elementarnych modyfikacji rozwiazania
-        # sa to operacje dwoch typow: dodaj albo usun
-        # dodac mozemy te filmy, ktore sie smieszcza
-        # usunac mozemy te, ktore sa aktualnie w rozwiazaniu
         acceptable_ops = [(s, v)
                           for s in range(data.amount_of_cache_servers)
                           for v in range(len(data.videos_sizes))
@@ -69,15 +51,6 @@ class AlgorithmUtils:
     @staticmethod
     def best_in_neighbourhood(data, solution, radius, number_of_bees):
 
-        """
-        Wysylamy losowo 'number_of_bees' pszczol do zbadania obszaru o promieniu radius.
-        Zwracamy najlepsze z tych rozwiazan.
-
-        TODO Staralem sie wyliczac score od razu, zeby potem nie robic tego ponownie przy max(...) i w ostatnim ifie
-        Stad taka dziwna lista krotek: neighbours = [(solution, score(solution)), ...]
-        Da sie to bardziej zoptymalizowac?
-        """
-
         neighbours = []
         for _ in range(number_of_bees):
             neighbour = AlgorithmUtils.random_neighbour(data, solution, radius)
@@ -87,19 +60,10 @@ class AlgorithmUtils:
 
     @staticmethod
     def free_space(data, solution, server):
-
-        """
-        Ile wolnych MB na danym serwerze (do sprawdzania, czy mozna dodac film)
-        """
-
         return data.cache_size - sum([data.videos_sizes[v] for v in solution[server]])
 
     @staticmethod
     def solution_copy(solution):
-
-        """
-        Bo python.
-        """
 
         res = dict()
         for s in solution:
