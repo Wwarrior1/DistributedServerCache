@@ -18,7 +18,10 @@ def main():
 
     before = time()
     data = parse_input(input_file)
-    best_solution = Algorithm.execute(data, n, m, e, nep, nsp, ngh, iterations)
+    alg_res = Algorithm.execute(data, n, m, e, nep, nsp, ngh, iterations)
+    best_solution = alg_res[0]
+    best_iter = alg_res[1]
+
     if should_save:
         save_solution(best_solution, output_file)
         score = check_solution(input_file, output_file)
@@ -31,6 +34,8 @@ def main():
     print(best_solution)
     print("-----------------------------")
     print("Algorithm took: " + str(round(after - before, 2)) + " s")
+    print("-----------------------------")
+    print("Achieved after iteration: " + str(best_iter+1))
     print("-----------------------------")
     print("Saved time: " + str(round(score / 1000, 2)) + " s (score: " + str(score) + ")")
 
