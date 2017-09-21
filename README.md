@@ -2,7 +2,8 @@
 [Operational Research] University project of distributed server caching using Pham's bee algorithm
 
 # Running
-```python main.py [-h] [-i I] [-o O] [-n N] [-m M] [-e E] [-nep NEP] [-nsp NSP]
+```
+python main.py [-h] [-i I] [-o O] [-n N] [-m M] [-e E] [-nep NEP] [-nsp NSP]
                [-ngh NGH] [-max MAX] [-s S]
 
 optional arguments:
